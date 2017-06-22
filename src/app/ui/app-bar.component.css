@@ -1,9 +1,22 @@
+.navbar {
+  float: right;
+}
+
+li.link {
+  list-style: none;
+  display: inline;
+  position: relative;
+  top: 1rem;
+}
+
 .app-bar {
   height: 65px;
   padding: 5px 30px;
   background-color: #00BCD4;
 }
 .logo {
+  position: relative;
+  top: 18%;
   color: white;
   font-size: 30px;
   font-weight: 300;
