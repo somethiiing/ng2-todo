@@ -1,5 +1,7 @@
 .navbar {
+  position: relative;
   float: right;
+  top: -40%;
 }
 
 li.link {

@@ -11,4 +11,8 @@ import {
 
 export class NoteCardComponent {
   @Input() note = {};
+
+  onChecked() {
+    console.log('note', this.note)
+  }
 };

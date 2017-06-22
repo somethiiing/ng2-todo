@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class NoteCardContainerComponent {
-  note: {
+  note = {
     title: 'this is a note',
     value: 'this is the value!'
   }
