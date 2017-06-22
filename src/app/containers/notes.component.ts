@@ -7,8 +7,14 @@ import { Component } from '@angular/core';
 })
 
 export class NoteCardContainerComponent {
-  note = {
-    title: 'this is a note',
-    value: 'this is the value!'
+  notes = [
+    { title: 'this is a note', value: 'this is the value!', color: 'green' },
+    { title: 'this is a note', value: 'this is the value!', color: 'blue' },
+    { title: 'this is a note', value: 'this is the value!', color: 'red' }
+  ]
+
+  onNoteChecked(i: number) {
+    this.notes.splice(i, 1);
   }
+
 }
