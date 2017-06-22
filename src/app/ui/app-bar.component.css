@@ -5,8 +5,7 @@
 li.link {
   list-style: none;
   display: inline;
-  position: relative;
-  top: 1rem;
+  margin: 5px;
 }
 
 .app-bar {
