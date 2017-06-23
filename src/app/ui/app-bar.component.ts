@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './app-bar.component.html'
 })
 
-export class AppBarComponent {};
+export class AppBar {};

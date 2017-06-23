@@ -1,3 +1,5 @@
-export { AppBarComponent } from './app-bar.component';
-export { NoteCardComponent } from './note-card.component';
-export { NoteCreatorComponent } from './note-creator.component';
+
+export { AppBar } from './app-bar.component';
+export { NoteCard } from './note-card.component';
+export { NoteCreator } from './note-creator.component';
+export { ColorPicker } from './color-picker.component';

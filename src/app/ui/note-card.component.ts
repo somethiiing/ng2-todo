@@ -11,7 +11,7 @@ import {
   styleUrls: ['./note-card.component.css']
 })
 
-export class NoteCardComponent {
+export class NoteCard {
   @Input() note = {};
   @Output() checked = new EventEmitter();
   showCheck = false;
