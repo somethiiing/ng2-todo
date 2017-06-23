@@ -6,15 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./notes.component.css']
 })
 
-export class NoteCardContainerComponent {
-  notes = [
-    { title: 'this is a note', value: 'this is the value!', color: 'green' },
-    { title: 'this is a note', value: 'this is the value!', color: 'blue' },
-    { title: 'this is a note', value: 'this is the value!', color: 'red' }
-  ]
+export class NoteCardContainer {
+  notes = []
 
   onNoteChecked(i: number) {
     this.notes.splice(i, 1);
+  }
+
+  addNewNote(note) {
+    this.notes.push(note);
   }
 
 }

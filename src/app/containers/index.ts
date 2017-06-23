@@ -1,1 +1,1 @@
-export { NoteCardContainerComponent } from './notes.component';
+export { NoteCardContainer } from './notes.component';
