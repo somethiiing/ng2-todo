@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NoteService } from '../services';
 
 @Component({
   selector: 'notes-container',
@@ -7,14 +8,25 @@ import { Component } from '@angular/core';
 })
 
 export class NoteCardContainer {
-  notes = []
+  notes = [];
 
-  onNoteChecked(i: number) {
-    this.notes.splice(i, 1);
+  constructor(private noteService: NoteService) {
+    this.noteService.getNotes()
+      .subscribe( data => this.notes = data)
   }
 
   addNewNote(note) {
-    this.notes.push(note);
+    this.noteService.createNote(note)
+      .subscribe( data => this.notes.push(data))
   }
+
+  onNoteChecked(note) {
+    this.noteService.completeNote(note)
+      .subscribe( data => {
+        const i = this.notes.findIndex(localNote => localNote.id === data.id);
+        this.notes.splice(i, 1);
+      });
+  }
+
 
 }

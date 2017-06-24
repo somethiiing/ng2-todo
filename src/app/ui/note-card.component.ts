@@ -12,7 +12,11 @@ import {
 })
 
 export class NoteCard {
-  @Input() note = {};
+  @Input() note = {
+    title: '',
+    value: '',
+    color: ''
+  };
   @Output() checked = new EventEmitter();
   showCheck = false;
 

@@ -9,7 +9,7 @@ export class ApiService {
     Accept: 'application/json'
   });
 
-  api_url: String = 'http://localhost:3500';
+  api_url: String = 'http://localhost:3000/api';
 
   constructor(private http: Http) { }
 

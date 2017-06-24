@@ -3,7 +3,7 @@ import { ApiService } from './api';
 
 @Injectable()
 export class NoteService {
-  path: string = './notes';
+  path: string = '/notes';
   constructor(private api: ApiService) {}
 
   createNote(note) {
