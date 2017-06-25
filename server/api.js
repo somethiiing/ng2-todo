@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let notesArr = [];
+let notesArr = [{title: 'hi', value: 'hello', color: 'blue'}];
 
 router.get('/', (req, res) => {
   res.send('api healthcheck 200');
@@ -16,7 +16,10 @@ router.post('/notes', (req, res) => {
 });
 
 router.delete('/notes', (req, res) => {
-  res.send(200);
+  const note = req.body;
+  const index = notesArr.findIndex( elem => elem === note);
+  const result = notesArr.splice(index, 1);
+  res.send(result);
 });
 
 module.exports = router;

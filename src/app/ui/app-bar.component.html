@@ -1,10 +1,10 @@
 <header class="app-bar middle-xs">
-  <span class="logo row col-xs-5">
+  <span [routerLink]="['']" class="logo row col-xs-5">
     notes.
   </span>
   <nav class="col-xs-2 navbar">
     <div class="row middle-xs between-xs">
-      <li class="link">settings</li>
+      <li [routerLink]="['about']" class="link">about</li>
       <li class="link">signout</li>
     </div>
   </nav>

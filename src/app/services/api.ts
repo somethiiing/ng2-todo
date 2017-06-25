@@ -46,8 +46,13 @@ export class ApiService {
       .map(this.getJson);
   }
 
-    delete(path: string): Observable<any> {
-    return this.http.delete(`${this.api_url}${path}`, this.headers)
+  delete(path: string, data): Observable<any> {
+    const options = {
+      headers: this.headers,
+      body: data
+    };
+
+    return this.http.delete(`${this.api_url}${path}`, options)
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)

@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { App } from './app.component';
-import { NoteCardContainer } from './containers';
 import { AppBar, NoteCard, NoteCreator, ColorPicker } from './ui';
+import { NoteCardContainer, About } from './containers';
 import { ApiService, NoteService} from './services';
+import { routes } from './router';
 
 @NgModule({
   declarations: [
@@ -14,12 +15,14 @@ import { ApiService, NoteService} from './services';
     NoteCard,
     NoteCardContainer,
     NoteCreator,
-    ColorPicker
+    ColorPicker,
+    About
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routes
   ],
   providers: [
     ApiService,
