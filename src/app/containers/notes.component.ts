@@ -20,12 +20,10 @@ export class NoteCardContainer {
       .subscribe( data => this.notes.push(data))
   }
 
-  onNoteChecked(note) {
+  onNoteChecked(note, index) {
+    this.notes.splice(index, 1);
     this.noteService.completeNote(note)
-      .subscribe( data => {
-        const i = this.notes.findIndex(localNote => localNote.id === data.id);
-        this.notes.splice(i, 1);
-      });
+      .subscribe();
   }
 
 
