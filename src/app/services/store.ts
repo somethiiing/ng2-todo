@@ -20,12 +20,12 @@ export class StoreService {
     const currentState = this.store.getState();
     const collection = currentState[prop];
     this.store.setState(Object.assign({}, currentState, {
-    [prop]: collection.map(item => {
-      if (item.id !== state.id) {
-        return item;
-      }
-      return Object.assign({}, item, state)
-    })
+      [prop]: collection.map(item => {
+        if (item.id !== state.id) {
+          return item;
+        }
+        return Object.assign({}, item, state)
+      })
     }))
   }
 
