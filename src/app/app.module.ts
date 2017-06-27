@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { App } from './app.component';
 import { AppBar, NoteCard, NoteCreator, ColorPicker } from './ui';
 import { NoteCardContainer, About } from './containers';
-import { ApiService, NoteService} from './services';
+import { ApiService, NoteService, StoreService } from './services';
 import { routes } from './router';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { routes } from './router';
   ],
   providers: [
     ApiService,
-    NoteService
+    NoteService,
+    StoreService
   ],
   bootstrap: [App]
 })

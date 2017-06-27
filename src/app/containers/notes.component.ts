@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NoteService } from '../services';
+import { Component, OnInit } from '@angular/core';
+import { NoteService, StoreService } from '../services';
+import { Store } from '../store';
 
 @Component({
   selector: 'notes-container',
@@ -7,23 +8,43 @@ import { NoteService } from '../services';
   styleUrls: ['./notes.component.css']
 })
 
-export class NoteCardContainer {
+export class NoteCardContainer implements OnInit {
   notes = [];
+  state = {
+    notes: []
+  };
 
-  constructor(private noteService: NoteService) {
+  constructor(
+    private noteService: NoteService,
+    private storeService: StoreService,
+    private store: Store
+  ) { }
+
+  ngOnInit() {
     this.noteService.getNotes()
-      .subscribe( data => this.notes = data)
+      .subscribe(data => this.storeService.update('notes', { notes: data } ));
+
+    this.store.changes
+      .subscribe(data => this.updateState(data));
   }
 
   addNewNote(note) {
+    // this.notes.push(note);
+    this.storeService.add('notes', note )
     this.noteService.createNote(note)
-      .subscribe( data => this.notes.push(data))
+      .subscribe()
   }
 
   onNoteChecked(note, index) {
-    this.notes.splice(index, 1);
+    // this.notes.splice(index, 1);
+    this.storeService.findAndDelete('notes', note);
     this.noteService.completeNote(note)
       .subscribe();
+  }
+
+  updateState(newState) {
+    const temp = Object.assign({}, newState, this.state);
+    this.state = temp;
   }
 
 

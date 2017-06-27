@@ -29,10 +29,13 @@ export class StoreService {
     }))
   }
 
-  findAndDelete(prop, id) {
+  findAndDelete(prop, note) {
     const currentState = this.store.getState();
-    const collection = currentState[prop];
-    this.store.setState(Object.assign({}, currentState, { [prop]: collection.filter(item => item.id !== id) }));
+    let collection = currentState[prop];
+    const index = collection.find( elem => elem === note );
+    collection = collection.splice(index, 1);
+    this.store.setState({notes: collection});
+    // this.store.setState(Object.assign({}, currentState, { [prop]: collection.filter(item => item.id !== id) }));
   }
 
 
