@@ -6,8 +6,8 @@ export class StoreService {
   constructor(private store: Store) {}
 
   update(prop, state) {
-    const currState = this.store.getState();
-    this.store.setState(Object.assign({}, currState, { [prop]: state }));
+    const currentState = this.store.getState();
+    this.store.setState(Object.assign({}, currentState, { [prop]: state }));
   }
 
   add(prop, state) {
@@ -32,9 +32,10 @@ export class StoreService {
   findAndDelete(prop, note) {
     const currentState = this.store.getState();
     let collection = currentState[prop];
-    const index = collection.find( elem => elem === note );
-    collection = collection.splice(index, 1);
-    this.store.setState({notes: collection});
+    collection = collection
+      .filter( value => value.value !== note.value)
+      .filter(value => value.title !== note.title);
+    this.store.setState(Object.assign({}, currentState, { [prop]: collection }));
     // this.store.setState(Object.assign({}, currentState, { [prop]: collection.filter(item => item.id !== id) }));
   }
 

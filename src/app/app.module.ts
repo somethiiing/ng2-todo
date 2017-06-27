@@ -7,6 +7,7 @@ import { AppBar, NoteCard, NoteCreator, ColorPicker } from './ui';
 import { NoteCardContainer, About } from './containers';
 import { ApiService, NoteService, StoreService } from './services';
 import { routes } from './router';
+import { Store } from './store';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { routes } from './router';
   providers: [
     ApiService,
     NoteService,
+    Store,
     StoreService
   ],
   bootstrap: [App]

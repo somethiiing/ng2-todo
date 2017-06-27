@@ -10,9 +10,6 @@ import { Store } from '../store';
 
 export class NoteCardContainer implements OnInit {
   notes = [];
-  state = {
-    notes: []
-  };
 
   constructor(
     private noteService: NoteService,
@@ -21,31 +18,19 @@ export class NoteCardContainer implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.noteService.getNotes()
-      .subscribe(data => this.storeService.update('notes', { notes: data } ));
-
     this.store.changes
-      .subscribe(data => this.updateState(data));
+      .map(data => data.notes)
+      .subscribe(notes => this.notes = notes );
+
+    this.noteService.getNotes().subscribe();
   }
 
   addNewNote(note) {
-    // this.notes.push(note);
-    this.storeService.add('notes', note )
-    this.noteService.createNote(note)
-      .subscribe()
+    this.noteService.createNote(note).subscribe()
   }
 
   onNoteChecked(note, index) {
-    // this.notes.splice(index, 1);
-    this.storeService.findAndDelete('notes', note);
-    this.noteService.completeNote(note)
-      .subscribe();
+    this.noteService.completeNote(note).subscribe();
   }
-
-  updateState(newState) {
-    const temp = Object.assign({}, newState, this.state);
-    this.state = temp;
-  }
-
 
 }
