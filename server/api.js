@@ -48,8 +48,14 @@ router.post('/signup', (req, res) => {
   const username = req.body.email;
   const password = req.body.password;
   if (!helpers.findUser(database, username)) { res.send({data: 'user already exists'}) };
+  database[username] = {
+    username: username,
+    password: password,
+    notes: []
+  }
   // create jwt token stuff
-
+  let token = jwt.sign({user:username}, 'secret');
+  res.send(token);
 });
 
 router.post('./signin', (req, res) => {
