@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const api = require('./server/api');
 
 // app setup
