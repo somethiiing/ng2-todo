@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { App } from './app.component';
 import { AppBar, NoteCard, NoteCreator, ColorPicker } from './ui';
-import { NoteCardContainer, About } from './containers';
-import { ApiService, NoteService, StoreService } from './services';
+import { NoteCardContainer, About, Auth } from './containers';
+import { ApiService, NoteService, StoreService, AuthService } from './services';
 import { routes } from './router';
 import { Store } from './store';
 
@@ -17,7 +17,8 @@ import { Store } from './store';
     NoteCardContainer,
     NoteCreator,
     ColorPicker,
-    About
+    About,
+    Auth
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { Store } from './store';
     ApiService,
     NoteService,
     Store,
-    StoreService
+    StoreService,
+    AuthService
   ],
   bootstrap: [App]
 })
