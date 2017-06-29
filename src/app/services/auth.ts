@@ -10,7 +10,6 @@ import 'rxjs/Rx';
 export class AuthService implements CanActivate {
 
   JWT_KEY: string = 'notes_token';
-  JWT: string = '';
 
   constructor(
     private router: Router,
@@ -50,10 +49,7 @@ export class AuthService implements CanActivate {
     return this.apiService.post(`/${path}`, credits)
       .do(res => this.setJwt(res.token))
       .do(res => {
-        const data = {
-          user: res.data,
-          jwt: res.token
-        };
+        const data = { user: res.data, jwt: res.token };
         this.storeService.update('user', data);
       })
       .map(res => res.data);
@@ -64,8 +60,5 @@ export class AuthService implements CanActivate {
     this.store.purge();
     this.router.navigate(['auth']);
   }
-
-
-
 
 }
