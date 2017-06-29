@@ -63,8 +63,25 @@ router.post('/signup', (req, res) => {
   res.json(result);
 });
 
-router.post('./signin', (req, res) => {
-
+router.post('/signin', (req, res) => {
+  const username = req.body.email;
+  const password = req.body.password;
+  const searchRes = helpers.findUser(database, username);
+  let result;
+  if (!searchRes) { result = {data: username, status: 'USERDOESNOTEXIST' } }
+  else if (database[searchRes].password !== password) { result = {data: username, status: 'INCORRECTPASSWORD'} }
+  else {
+    let token = jwt.sign({ username: username }, 'secret');
+    result = {
+      token: token,
+      data: {
+        username: username,
+        notes: database[username].notes
+      },
+      status: 'SUCCESS'
+    };
+  }
+  res.json(result);
 });
 
 module.exports = router;
