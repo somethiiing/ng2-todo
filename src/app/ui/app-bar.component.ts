@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services';
 
 @Component({
   selector: 'app-bar',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './app-bar.component.html'
 })
 
-export class AppBar {};
+export class AppBar {
+  constructor(private authService: AuthService) { }
+};
