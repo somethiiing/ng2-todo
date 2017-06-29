@@ -10,6 +10,7 @@ import { Store } from '../store';
 
 export class NoteCardContainer implements OnInit {
   notes = [];
+  token = '';
 
   constructor(
     private noteService: NoteService,
@@ -22,15 +23,16 @@ export class NoteCardContainer implements OnInit {
       .map(data => data.notes)
       .subscribe(notes => this.notes = notes );
 
-    this.noteService.getNotes().subscribe();
+    this.token = window.localStorage.getItem('notes_token');
+    this.noteService.getNotes(this.token).subscribe();
   }
 
   addNewNote(note) {
-    this.noteService.createNote(note).subscribe()
+    this.noteService.createNote(this.token, note).subscribe()
   }
 
   onNoteChecked(note, index) {
-    this.noteService.completeNote(note).subscribe();
+    this.noteService.completeNote(this.token, note).subscribe();
   }
 
 }

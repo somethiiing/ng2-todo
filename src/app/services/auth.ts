@@ -49,7 +49,13 @@ export class AuthService implements CanActivate {
   authenticate(path, credits): Observable<any> {
     return this.apiService.post(`/${path}`, credits)
       .do(res => this.setJwt(res.token))
-      .do(res => this.storeService.update('user', res.data))
+      .do(res => {
+        const data = {
+          user: res.data,
+          jwt: res.token
+        };
+        this.storeService.update('user', data);
+      })
       .map(res => res.data);
   }
 

@@ -11,7 +11,9 @@ export interface Note {
 }
 
 export interface User {
-  id?: string
+  id?: string,
+  jwt?: string,
+  user?: string
 }
 
 export interface State {

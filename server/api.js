@@ -44,6 +44,39 @@ router.delete('/notes', (req, res) => {
   res.send(result);
 });
 
+router.post('/getnotes', (req, res) => {
+  const token = req.body.jwt;
+  jwt.verify(token, 'secret', (err, decoded) => {
+    if (err) { console.log(err) }
+    const username = decoded.username;
+    res.send(database[username].notes);
+  });
+});
+
+router.post('/addnote', (req, res) => {
+  const note = req.body.note;
+  const token = req.body.jwt;
+  jwt.verify(token, 'secret', (err, decoded) => {
+    if (err) { console.log(err) }
+    const username = decoded.username;
+    database[username].notes.push(note);
+    res.send(note);
+  });
+});
+
+router.post('/deletenote', (req, res) => {
+  const note = req.body.note;
+  const token = req.body.jwt;
+  jwt.verify(token, 'secret', (err, decoded) => {
+    if (err) { console.log(err) }
+    const username = decoded.username;
+    const index = database[username].notes.findIndex(elem => elem === note);
+    const result = database[username].notes.splice(index, 1);
+    res.send(result[0]);
+  });
+});
+
+
 router.post('/signup', (req, res) => {
   const username = req.body.email;
   const password = req.body.password;

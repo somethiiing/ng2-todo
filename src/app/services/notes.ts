@@ -10,19 +10,36 @@ export class NoteService {
     private storeService: StoreService
   ) {}
 
-  createNote(note) {
-    return this.api.post(this.path, note)
-      .do(data => this.storeService.add('notes', data));
-  }
+  // createNote(note) {
+  //   return this.api.post(this.path, note)
+  //     .do(data => this.storeService.add('notes', data));
+  // }
 
-  getNotes() {
-    return this.api.get(this.path)
+  // getNotes() {
+  //   return this.api.get(this.path)
+  //     .do(resp => this.storeService.update('notes', resp));
+  // }
+
+  // completeNote(note) {
+  //   return this.api.delete(this.path, note)
+  //     .do(data => this.storeService.findAndDelete('notes', note));
+  // }
+
+  getNotes(jwt: string) {
+    return this.api.post('/getnotes', {jwt: jwt} )
       .do(resp => this.storeService.update('notes', resp));
   }
 
-  completeNote(note) {
-    return this.api.delete(this.path, note)
-      .do(data => this.storeService.findAndDelete('notes', note));
+  createNote(jwt, note) {
+    const data = { note: note, jwt: jwt }
+    return this.api.post('/addnote', data)
+      .do(res => this.storeService.add('notes', res));
+  }
+
+  completeNote(jwt, note) {
+    const data = { note: note, jwt: jwt }
+    return this.api.post('/deletenote', data)
+      .do(res => this.storeService.findAndDelete('notes', res));
   }
 
 }
