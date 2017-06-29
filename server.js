@@ -5,6 +5,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const morgan = require('morgan');
 const api = require('./server/api');
 
 // app setup
@@ -16,6 +17,7 @@ app.use( (req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

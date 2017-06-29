@@ -27,11 +27,11 @@ export class AuthService implements CanActivate {
 
   setJwt(jwt: string) {
     window.localStorage.setItem(this.JWT_KEY, jwt);
-    this.apiService.setHeaders({Authorizaation: `Bearer ${jwt}`});
+    this.apiService.setHeaders({Authorization: `Bearer ${jwt}`});
   }
 
   isAuthorized(): boolean {
-    return Boolean(this.JWT);
+    return Boolean(window.localStorage.getItem(this.JWT_KEY));
   }
 
   canActivate(): boolean {
@@ -49,6 +49,7 @@ export class AuthService implements CanActivate {
   authenticate(path, credits): Observable<any> {
     return this.apiService.post(`/${path}`, credits)
     // if res.data === 'user already found, stop this'
+      // .filter(data => data.status !== 'USEREXISTS')
       .do(res => this.setJwt(res.token))
       .do(res => this.storeService.update('user', res.data))
       .map(res => res.data);

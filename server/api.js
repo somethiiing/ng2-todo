@@ -47,15 +47,20 @@ router.delete('/notes', (req, res) => {
 router.post('/signup', (req, res) => {
   const username = req.body.email;
   const password = req.body.password;
-  if (!helpers.findUser(database, username)) { res.send({data: 'user already exists'}) };
-  database[username] = {
-    username: username,
-    password: password,
-    notes: []
+  const searchRes = helpers.findUser(database, username);
+  let result;
+  if (searchRes) { result = {data: username, status: 'USEREXISTS' } }
+  else {
+    database[username] = {
+      username: username,
+      password: password,
+      notes: []
+    }
+    // create jwt token stuff
+    let token = jwt.sign({username:username}, 'secret');
+    result = { token: token, data: username, status: 'SUCCESS' };
   }
-  // create jwt token stuff
-  let token = jwt.sign({user:username}, 'secret');
-  res.send(token);
+  res.json(result);
 });
 
 router.post('./signin', (req, res) => {
