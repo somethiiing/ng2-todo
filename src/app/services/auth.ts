@@ -19,9 +19,7 @@ export class AuthService implements CanActivate {
   ) {
     const token = window.localStorage.getItem(this.JWT_KEY);
 
-    if (token) {
-      this.setJwt(token);
-    }
+    if (token) { this.setJwt(token) }
   }
 
   setJwt(jwt: string) {
