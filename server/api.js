@@ -63,7 +63,6 @@ router.post('/deletenote', (req, res) => {
   });
 });
 
-
 router.post('/signup', (req, res) => {
   const username = req.body.email;
   const password = req.body.password;
