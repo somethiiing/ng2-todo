@@ -24,19 +24,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-router.get('/', (req, res) => {
-  res.send('api healthcheck 200');
-});
-
-router.get('/notes', (req, res) => {
-  res.send(notesArr);
-});
-
-router.post('/notes', (req, res) => {
-  notesArr.push(req.body);
-  res.send(req.body);
-});
-
 router.delete('/notes', (req, res) => {
   const note = req.body;
   const index = notesArr.findIndex( elem => elem === note);
