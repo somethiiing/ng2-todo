@@ -24,13 +24,6 @@ passport.use(new LocalStrategy(
   }
 ));
 
-router.delete('/notes', (req, res) => {
-  const note = req.body;
-  const index = notesArr.findIndex( elem => elem === note);
-  const result = notesArr.splice(index, 1);
-  res.send(result);
-});
-
 router.post('/getnotes', (req, res) => {
   const token = req.body.jwt;
   jwt.verify(token, 'secret', (err, decoded) => {
