@@ -41,7 +41,7 @@ export class Auth {
           this.errorMessage = 'Wrong username or password. Please try again!';
         } else if (res === 'USEREXISTS') {
           this.errorMessage = 'User already exists!';
-        } else if (res === 'success' ) {
+        } else if (res === 'SUCCESS' ) {
           this.router.navigate([''])
         }
       });
