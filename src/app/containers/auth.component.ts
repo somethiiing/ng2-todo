@@ -16,6 +16,7 @@ export class Auth {
 
   mode: string = 'signin';
   linkText: string = 'Don\'t have an account?';
+  errorMessage: string = '';
 
   constructor(
     private router: Router,
@@ -23,6 +24,7 @@ export class Auth {
   ) {}
 
   changeMode() {
+    this.errorMessage = '';
     if (this.mode === 'signin') {
       this.mode = 'signup';
       this.linkText = 'Already have an account?';
@@ -34,7 +36,15 @@ export class Auth {
 
   authenticate() {
     this.authService.authenticate(this.mode, this.user)
-      .subscribe( () => this.router.navigate(['']));
+      .subscribe( res => {
+        if (res === 'INCORRECTPASSWORD' || res === 'USERDOESNOTEXIST' ) {
+          this.errorMessage = 'Wrong username or password. Please try again!';
+        } else if (res === 'USEREXISTS') {
+          this.errorMessage = 'User already exists!';
+        } else if (res === 'success' ) {
+          this.router.navigate([''])
+        }
+      });
   }
 
 

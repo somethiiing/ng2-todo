@@ -61,7 +61,7 @@ router.post('/signup', (req, res) => {
   const password = req.body.password;
   const searchRes = helpers.findUser(database, username);
   let result;
-  if (searchRes) { result = {data: username, status: 'USEREXISTS' } }
+  if (searchRes) { result = {data: username, token: null, status: 'USEREXISTS' } }
   else {
     database[username] = {
       username: username,
@@ -80,8 +80,8 @@ router.post('/signin', (req, res) => {
   const password = req.body.password;
   const searchRes = helpers.findUser(database, username);
   let result;
-  if (!searchRes) { result = {data: username, status: 'USERDOESNOTEXIST' } }
-  else if (database[searchRes].password !== password) { result = {data: username, status: 'INCORRECTPASSWORD'} }
+  if (!searchRes) { result = {data: username, token: null, status: 'USERDOESNOTEXIST' } }
+  else if (database[searchRes].password !== password) { result = {data: username, token: null, status: 'INCORRECTPASSWORD'} }
   else {
     let token = jwt.sign({ username: username }, 'secret');
     result = {
